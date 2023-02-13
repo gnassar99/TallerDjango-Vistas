@@ -290,6 +290,25 @@
 		},
 		{
 			"name": "Update Variable",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response body contains updated data\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.equal(\"New Var\");    \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -381,6 +400,31 @@
 		},
 		{
 			"name": "Retrive Variable",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body is not empty\", function () {\r",
+							"    pm.expect(pm.response.json().length).to.be.above(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"New Var\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -479,7 +523,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"variable\": 2,\r\n    \"value\": 72.0,\r\n    \"unit\": \"Celcius\",\r\n    \"place\": \"ML510\",\r\n    \"dateTime\": \"2023-02-13T02:34:22.623Z\"\r\n}",
+					"raw": "{\r\n    \"variable\": 10,\r\n    \"value\": 72.0,\r\n    \"unit\": \"Celcius\",\r\n    \"place\": \"ML510\",\r\n    \"dateTime\": \"2023-02-13T02:34:22.623Z\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
